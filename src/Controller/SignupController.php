@@ -12,6 +12,7 @@ class SignupController extends AbstractController
      */
     public function index()
     {
+		
         return $this->render('signup/index.html.twig', [
             'controller_name' => 'SignupController',
         ]);

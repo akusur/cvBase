@@ -18,4 +18,3 @@ class Task
      */
     protected $dueDate;
 }
-

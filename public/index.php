@@ -4,12 +4,19 @@
 use App\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 
 require dirname(__DIR__).'/config/bootstrap.php';
 
+if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+}
+					
+if(!(isset($_SESSION['title']))){ $session->set('title', 'Login'); }
+
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);
-
     Debug::enable();
 }
 

@@ -16,6 +16,7 @@ $validator = new EmailValidator();
 
 class RegistrationController extends AbstractController
 {
+	
       /**
      * @Route("/register", name="app_register")
      */
@@ -41,7 +42,6 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 			
             // do anything else you need here, like send an email
-
             return $this->redirectToRoute('app_login_login');
         }
 		print_r($form->get('plainPassword')->getData());

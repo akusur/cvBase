@@ -1,13 +1,6 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-		<a href="{{ path('welcome') }}">Home</a>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+{% include 'header.html.twig' %}
+
+        {% block nesto %}{% endblock %}
+		
+{% include 'footer.html.twig' %}
