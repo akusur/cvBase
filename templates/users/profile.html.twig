@@ -1,0 +1,165 @@
+{% extends 'base.html.twig'%}
+
+{% block title %}<title>My profile</title>{% endblock %}
+
+{% block nesto %}
+
+	{% set firstname, lastname, phnumber, email, user_role, applied = 'test', 'test', '+38761234567', 'test@test.com', 'User', 0 %}	
+	
+<div class="container container-rel">
+	<div class = "jumbotron jumbotron-index form-align text-center vertical-center-edit-app max-width765px ">
+	<h2 class = "text-center">My profile</h2>
+		<br>					
+		<div class = "row" class = "width100">
+			<form method="post" id = "update_form" action="updateMyProfile.php" enctype="multipart/form-data" class= "width100 alignleft ">  
+			
+				<div class="row">
+
+					<div class = "col-xs-2 col-sm-2">
+					</div>
+
+					<div class = "col-xs-10 col-sm-3">
+						<label for = "lastname"> First name: </label> 	
+						<br>
+						<br>
+					</div>
+					
+					<div class = "col-xs-2 col-sm-1">
+					</div>
+					
+					<div class = "col-xs-5 col-sm-3">
+						<input type="text" name = "firstname" id="firstname"  onkeypress="enterCalls(this)" onblur="checkField(this)" style = "width = 100%;" value={{ firstname }} >
+						<span id = "firstnameerror" class = "error"></span>
+					</div>
+					  
+					<div class = "col-sm-3">
+					</div>
+				  
+				</div>
+			  
+				<div class = "row">
+			  
+					<div class = "col-xs-2 col-sm-2">
+					</div>
+
+					
+					<div class = "col-xs-10 col-sm-3">
+						<label for = "lastname"> Last name: </label> 		
+						<br>
+						<br>
+					</div>
+					
+					<div class = "col-xs-2 col-sm-1">
+					</div>
+					
+					<div class = "col-xs-10 col-sm-2">
+						<input type="text" name = "lastname" id="lastname" onkeypress="enterCalls(this)" onblur="checkField(this)" value={{ lastname }}  >
+						<span id="lastnameerror" class = "error"></span>
+					</div>
+					  
+					
+				</div>
+			  
+				<div class = "row">
+					 
+					<div class = "col-xs-2 col-sm-2">
+					</div>
+					 
+					<div class = "col-xs-10 col-sm-3">
+						<label for = "phoneNumber"> Phone number: </label> 	
+						<br>
+						<br>
+					</div>
+					
+					<div class = "col-xs-2 col-sm-1">
+					</div>
+					<div class = "col-xs-10 col-sm-2">
+						<input type="text" name = "phoneNumber" id="phoneNumber" value={{ phnumber }}>
+						<span id="phonenrerror" class = "error"></span>
+					</div>
+				</div>
+				
+				<div class = "row">
+					 
+					<div class = "col-xs-2 col-sm-2">
+					</div>
+					 
+					<div class = "col-xs-10 col-sm-3">
+						<label for = "email">E-mail: </label> 	
+						<br>
+						<br>
+					</div>
+					
+					<div class = "col-xs-2 col-sm-1">
+					</div>
+					<div class = "col-xs-10 col-sm-2">
+						<input type="text" name = "email" id="email"  onkeypress="enterCalls(this)" onblur="checkField(this)" disabled value={{ email }}>
+						<span id="phonenrerror" class = "error"></span>
+					</div>
+				</div>
+			
+				{% if (applied) %}	
+						<div class = "row">
+						  
+							<div class = "col-xs-2 col-sm-2">
+							</div>
+ 
+							<div class = "col-xs-10 col-sm-3">
+								<label for = "file"> Open your last uploaded CV: </label> 	
+								<br>
+								<br>
+							</div>
+							
+							<div class = "col-xs-2 col-sm-1">
+							</div>
+														
+							{# <div class = "col-xs-10 col-sm-2"> #}
+								{# {{ "<a href=", "\"", appData[7], "\"", "target= ", "\"","_blank", "\"", ">Open PDF","</a>" }} #}
+							{# </div> #}
+							
+						</div>
+						
+									{% endif %}
+				
+				
+				<div class = "row">
+				  
+					<div class = "col-xs-2 col-sm-2">
+					</div>
+
+					<div class = "col-xs-10 col-sm-3">
+						<label for = "file"> Upload your{% if (applied) %}{{ " new" }}{% endif %} CV in .pdf: </label> 	
+						<br>
+						<br>
+					</div>
+					
+					<div class = "col-xs-2 col-sm-1">
+					</div>
+												
+					<div class = "col-xs-10 col-sm-2 text-center">
+						<input type="file" name="file" id = "file" size="50" />
+						<br>
+													{% if (errf is defined and errf is not empty) %} 
+						
+						<span id = "fileerror" class = "error">{{ errf }}</span>
+													{% endif %}
+						
+					</div>
+					
+				</div>
+				
+				<div class = "row text-center">
+						<input type="button" id="submit_btn" class="btn btn-default btn-lg" value = "Update" onclick="validateMyProfileEdit()"> <br>
+													{% if (_GET['succ'] is defined and _GET['succ'] == 1) %}
+						
+							<span id = 'newuser' style = "color: green;"></span>		
+													{% endif %}
+						
+							<div id = "edit_myprofile_error" class = "left-align-text">
+							
+				</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}

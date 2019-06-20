@@ -13,7 +13,7 @@ if (session_status() == PHP_SESSION_NONE) {
 		session_start();
 }
 					
-if(!(isset($_SESSION['title']))){ $session->set('title', 'Login'); }
+if(!(isset($_SESSION['title']))){ $_SESSION['title'] = 'Login'; }
 
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);

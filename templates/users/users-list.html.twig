@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}<title>Log in!</title>{% endblock %}
+
+{% block nesto %}
+
+<!-- Modal -->
+<div class="modal fade" tabindex= "-1" id="empModal" role="dialog" >
+	<div class="modal-dialog" role = "document">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+		
+			<!--<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>-->
+		</div>
+	</div>
+</div>
+
+
+<div id = "page-wrap" class="container container-rel min-width1020px">
+	<div class = "jumbotron text-center vertical-center-list">
+		{% if (_SESSION['logged_in'] is defined) %}
+			{% if (_SESSION['user_role'] == 'SUPERADMIN') %}
+			
+				<div class = "row text-center">
+					<div class = "col-sm-4">
+					</div>
+					
+					<div class = "col-sm-4">
+						<h2 class = "text-center">User List</h2>
+					</div>
+					
+					<div class = "col-sm-4">
+					</div>
+				</div>
+				
+				<br>
+					<table id = "ListofUsers" class=" table-striped table-bordered table"  class = "width100 min-width765px">
+						<thead>
+							 <tr>
+								<th>First name</th>
+								<th>Last name</th>
+								<th>Phone Number</th>
+								<th>E-mail</th>
+								<th>Role</th>
+								{% if (_SESSION['user_role'] == 'SUPERADMIN') %}
+									<th>Edit user</th>
+								{% endif %}
+							 </tr>
+						</thead>
+						<tbody id="myTable">
+													
+								{% for tmpUser in UsersArray %}
+									{% set userData = tmpUser.Get() %}
+									{{ '<tr>' }}
+									{% set i = 1 %}{% for i in i..5 %}
+										{{ "<td>"~ userData[i] ~"</td>" }}
+									{% endfor %} 
+									{% if (_SESSION['user_role'] == 'SUPERADMIN') %}
+										{{ "<td class = \"text-center\"><a id = \"user_"~userData[0]~"\" class = \"user_edit\"><img src=\"imgs\\editIcon.png\" title = \"Edit user\" alt=\"CommentIcon\" width=\"20\" height=\"20\"></a> </td>" }}
+									{% endif %}
+									{{ '</tr>' }}
+								{% endfor %}
+								
+							
+								</tbody>
+							</table>
+						
+						{% else %} 
+							{{ "You do not have the permission to see this page!" }}
+							{% endif %} 
+					{% else %} 
+						{{ "Please sign up to see this page." }}
+				{% endif %}
+			</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}<title>Log in!</title>{% endblock %}
+
+{% block nesto %}
+
+
+<div class="container container-rel">
+	<div id = "jumbotron-index" class = "jumbotron text-center vertical-center max-width450px jumbotron-index">
+		<h2 class = "text-center">Sign in</h2>
+		<form method="post" id = "login_form" action="login.php" enctype="multipart/form-data" class= "width100 alignleft">  
+		{% if error %}
+			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
+			<div class="row">
+				<div class = "col-sm-10 col-sm-offset-1">
+					<label for = "inputEmail"> E-mail: </label>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "col-sm-10 col-sm-offset-1 col-8 col-offset-2">
+					<input type="text" name = "email" value="{{ last_username }}" id="email" onkeypress="enterCalls(this)" onblur="requiredField(this)"  class = "login-input" >
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "col-sm-10 col-sm-offset-1">
+					<span id = "emailerror" class = "error"></span>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class = "col-sm-10 col-sm-offset-1">
+					<label for = "password"> Password: </label> 	
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "col-sm-10 col-sm-offset-1  col-8 col-offset-2">
+					<input type="password" name = "password" id="password" onkeypress="enterCalls(this)" onblur="requiredField(this)" class = "login-input">
+				</div>
+				<input type="hidden" name="_csrf_token"
+					   value="{{ csrf_token('authenticate') }}"
+				>
+
+				{#
+					Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+					See https://symfony.com/doc/current/security/remember_me.html
+
+					<div class="checkbox mb-3">
+						<label>
+							<input type="checkbox" name="_remember_me"> Remember me
+						</label>
+					</div>
+				#}
+				<div class = "col-sm-10 col-sm-offset-1">
+					<span id = "passworderror" class = "error"></span>
+						<?php
+							if(isset($err) && !empty($err)){
+						?>
+					<br><span id = "passworderror" class = "error"><?php echo $err;?></span>
+					<?php
+						}
+					?>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "col-sm-1">
+				</div>
+				<div class = "col-sm-5">
+					<a href = "#" style = "font-size: 12px;">
+						Forgot password?
+					</a>
+				</div>
+				<div class = "col-sm-6">
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "col-sm-1">
+				</div>
+				<div class = "col-sm-8" style = "font-size: 12px;">
+					Not registered? 
+					<a href = "signup.php" >
+						Sign up!
+					</a>
+				</div>
+				
+			</div>
+			<br>
+			<div class = "row text-center">
+			
+				<input type = "button" class="btn btn-primary btn-lg" id="submit_btn" value = "Login" onclick="validateLogIn()" style = "width:30%">
+				<br><br>
+				<div id = "loginerror" class="left-align-text"></div>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}
