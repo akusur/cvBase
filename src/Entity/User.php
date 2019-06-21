@@ -21,11 +21,6 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $email;
-
-    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -36,6 +31,12 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Person", mappedBy="Email", cascade={"persist", "remove"})
+	 * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $Email;
+	
     public function getId(): ?int
     {
         return $this->id;
@@ -43,12 +44,12 @@ class User implements UserInterface
 
     public function getEmail(): ?string
     {
-        return $this->email;
+        return $this->Email;
     }
 
     public function setEmail(string $email): self
     {
-        $this->email = $email;
+        $this->Email = $email;
         return $this;
     }
 
@@ -59,7 +60,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->Email;
     }
 
     /**

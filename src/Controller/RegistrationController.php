@@ -18,7 +18,6 @@ if (session_status() == PHP_SESSION_NONE) {
 		session_start();
 }
 	
-if(!(isset($_SESSION['title']))){ $_SESSION['title'] = 'Login'; }
 
 class RegistrationController extends AbstractController
 {
